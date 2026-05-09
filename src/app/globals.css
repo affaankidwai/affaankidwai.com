@@ -173,39 +173,35 @@ p {
   border-bottom: 1px solid var(--line);
 }
 
-.brand-lockup {
+.brand {
+  position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 12px;
+  font-family: var(--font-display), serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: -0.005em;
   color: var(--ink);
+  transition: color 200ms ease;
 }
 
-.brand-mark {
-  display: grid;
-  width: 32px;
-  height: 32px;
-  place-items: center;
-  border: 1px solid var(--line-strong);
-  border-radius: 999px;
-  background: var(--accent-soft);
+.brand::after {
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 1px;
+  content: "";
+  background: var(--accent);
+  transition: width 280ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.brand:hover {
   color: var(--accent);
 }
 
-.brand-lockup strong {
-  font-family: var(--font-display), serif;
-  font-weight: 600;
-  font-size: 1.05rem;
-  letter-spacing: -0.005em;
-}
-
-.brand-lockup small {
-  display: block;
-  margin-top: 1px;
-  font-family: var(--font-mono), monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
+.brand:hover::after {
+  width: 100%;
 }
 
 .site-header nav {
@@ -290,6 +286,27 @@ p {
   height: 100% !important;
   object-fit: cover;
   filter: saturate(1.04) contrast(1.02);
+  transform: scale(1.04);
+}
+
+/* Subtle scroll-driven parallax: photo drifts down + scales as the page
+   scrolls, gently revealing the section below. Pure CSS, no-ops on
+   browsers without animation-timeline support. */
+@supports (animation-timeline: scroll()) {
+  .hero-still {
+    animation: hero-parallax both linear;
+    animation-timeline: scroll(root);
+    animation-range: 0 90vh;
+  }
+}
+
+@keyframes hero-parallax {
+  from {
+    transform: translateY(0) scale(1.04);
+  }
+  to {
+    transform: translateY(8%) scale(1.1);
+  }
 }
 
 .hero-slide {
@@ -343,8 +360,46 @@ p {
 }
 
 .hero-copy .eyebrow {
-  color: rgba(250, 246, 236, 0.6);
+  color: rgba(250, 246, 236, 0.7);
   margin-bottom: 18px;
+}
+
+/* Live "now in Bengaluru" dot — gentle pulse */
+.live-dot {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 10px;
+  border-radius: 999px;
+  background: #6ad28b;
+  box-shadow: 0 0 12px rgba(106, 210, 139, 0.6);
+}
+
+.live-dot::after {
+  position: absolute;
+  inset: -4px;
+  content: "";
+  border-radius: 999px;
+  border: 1px solid rgba(106, 210, 139, 0.7);
+  animation: live-ping 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+@keyframes live-ping {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.7);
+  }
+  70%, 100% {
+    opacity: 0;
+    transform: scale(2.6);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot::after {
+    animation: none;
+  }
 }
 
 :root[data-theme="light"] .hero-copy .eyebrow {
@@ -358,6 +413,35 @@ p {
   font-weight: 500;
   max-width: 22ch;
   margin-bottom: 22px;
+  /* Letter-by-letter stagger entrance. Each <span> sets --i. */
+  display: inline-block;
+}
+
+.hero-copy h1 .ch {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.45em);
+  animation: ch-in 760ms cubic-bezier(0.2, 0.85, 0.2, 1) forwards;
+  animation-delay: calc(40ms * var(--i, 0) + 100ms);
+  white-space: pre;
+}
+
+@keyframes ch-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy h1 .ch {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .hero-still {
+    animation: none !important;
+  }
 }
 
 .hero-copy .lede {
@@ -393,16 +477,32 @@ p {
 }
 
 .btn-primary {
+  position: relative;
   background: var(--accent);
   color: #15130d;
   border: 1px solid var(--accent);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-primary::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  content: "";
+  background: linear-gradient(120deg, var(--accent) 0%, var(--accent-strong) 50%, var(--accent) 100%);
+  background-size: 200% 100%;
+  background-position: 0% 0%;
+  transition: background-position 700ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .btn-primary:hover {
-  background: var(--accent-strong);
-  border-color: var(--accent-strong);
-  transform: translateY(-1px);
-  box-shadow: 0 16px 44px rgba(224, 181, 114, 0.32);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 18px 48px rgba(224, 181, 114, 0.38);
+}
+
+.btn-primary:hover::before {
+  background-position: 100% 0%;
 }
 
 .btn-ghost {
@@ -419,7 +519,7 @@ p {
 .btn-ghost:hover {
   background: rgba(250, 246, 236, 0.1);
   border-color: rgba(250, 246, 236, 0.7);
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.02);
 }
 
 :root[data-theme="light"] .btn-ghost:hover {

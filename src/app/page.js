@@ -48,8 +48,17 @@ export default async function Home() {
             />
           </div>
           <div className="shell hero-copy">
-            <p className="eyebrow">Lucknow · Bengaluru</p>
-            <h1>Affaan Kidwai.</h1>
+            <p className="eyebrow">
+              <span className="live-dot" aria-hidden="true" />
+              Now in Bengaluru
+            </p>
+            <h1 aria-label="Affaan Kidwai.">
+              {"Affaan Kidwai.".split("").map((ch, i) => (
+                <span key={i} className="ch" style={{ "--i": i }} aria-hidden="true">
+                  {ch === " " ? " " : ch}
+                </span>
+              ))}
+            </h1>
             <p className="lede">
               Associate Application Developer at Oracle Financial Services
               Software. Wildlife photographer in Indian forests. This is where

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Aperture } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const nav = [
@@ -12,14 +11,8 @@ const nav = [
 export function SiteHeader() {
   return (
     <header className="site-header">
-      <Link className="brand-lockup" href="/" aria-label="Affaan Kidwai home">
-        <span className="brand-mark">
-          <Aperture size={16} strokeWidth={1.8} />
-        </span>
-        <span>
-          <strong>Affaan Kidwai</strong>
-          <small>Wildlife · Field Notes</small>
-        </span>
+      <Link className="brand" href="/" aria-label="Affaan Kidwai home">
+        Affaan Kidwai
       </Link>
       <nav aria-label="Primary navigation">
         {nav.map((item) => (
