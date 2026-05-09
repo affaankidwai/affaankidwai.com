@@ -18,7 +18,7 @@ export default function AboutPage() {
           <div className="shell">
             <p className="eyebrow">About</p>
             <h1>
-              Developer mind, <em>wildlife eye.</em>
+              Developer mind, <span className="accent">wildlife eye.</span>
             </h1>
             <p className="lede">
               {profile.role}. {profile.education}. The day job is back-end web

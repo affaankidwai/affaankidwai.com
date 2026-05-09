@@ -22,7 +22,7 @@ export default async function BlogIndex() {
           <div className="shell">
             <p className="eyebrow">Field Notes</p>
             <h1>
-              The <em>slow part</em> of wildlife photography, written down.
+              The <span className="accent">slow part</span> of wildlife photography, written down.
             </h1>
             <p className="lede">
               Trip journals, weather notes, gear thoughts, and the small

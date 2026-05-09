@@ -8,7 +8,7 @@ export function SiteFooter() {
         <div>
           <h4>Affaan Kidwai</h4>
           <h3>
-            Slow looking, <em>quiet frames.</em>
+            Slow looking, <span className="accent">quiet frames.</span>
           </h3>
           <p>
             A personal corner of the web for wildlife photographs from Indian

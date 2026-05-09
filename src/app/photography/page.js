@@ -21,7 +21,7 @@ export default function PhotographyPage() {
           <div className="shell">
             <p className="eyebrow">The archive</p>
             <h1>
-              All <em>frames,</em> in one place.
+              All <span className="accent">frames,</span> in one place.
             </h1>
             <p className="lede">
               Tigers from the dry forest. Birds from monsoon canopies and lake

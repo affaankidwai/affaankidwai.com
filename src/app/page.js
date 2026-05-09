@@ -21,6 +21,17 @@ const layoutClasses = [
   "is-short",
 ];
 
+const subjects = [
+  "Bengal Tiger",
+  "White-throated Kingfisher",
+  "Paradise Flycatcher",
+  "Pond Heron",
+  "Ruddy Shelduck",
+  "Stone-curlew",
+  "Song Thrush",
+  "Bluethroat",
+];
+
 export default async function Home() {
   const posts = (await getAllPosts()).slice(0, 3);
   const featured = featuredPhotos.slice(0, 6);
@@ -34,11 +45,13 @@ export default async function Home() {
           <div className="shell hero-copy">
             <p className="eyebrow">Wildlife photography · India</p>
             <h1>
-              Frames from forests <em>that don't hurry.</em>
+              Frames from forests
+              <br />
+              <span className="accent">that don&rsquo;t hurry.</span>
             </h1>
             <p className="lede">
-              I'm Affaan — a developer with a field notebook. This is where I
-              keep the photographs and the long, slow stories that come with
+              I&rsquo;m Affaan — a developer with a field notebook. This is where
+              I keep the photographs and the long, slow stories that come with
               waiting in a hide before sunrise.
             </p>
             <div className="hero-actions">
@@ -61,13 +74,26 @@ export default async function Home() {
           </span>
         </section>
 
-        <section className="section">
+        <section className="subjects-band" aria-label="Subjects in the archive">
+          <div className="subjects-track">
+            {[...subjects, ...subjects].map((subject, index) => (
+              <span
+                key={`${subject}-${index}`}
+                className={index % 2 === 0 ? "" : "muted"}
+              >
+                {subject}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        <section className="section reveal">
           <div className="shell">
             <div className="section-head">
               <div>
                 <p className="eyebrow">Selected work</p>
                 <h2>
-                  A small set of <em>frames</em> I keep coming back to.
+                  A small set of frames I keep <span className="accent">coming back to.</span>
                 </h2>
               </div>
               <p className="lede">
@@ -100,37 +126,37 @@ export default async function Home() {
                 </Link>
               ))}
             </div>
-            <Link className="section-link" href="/photography" style={{ marginTop: 32 }}>
+            <Link className="section-link" href="/photography" style={{ marginTop: 36 }}>
               Enter the full archive
               <ArrowRight size={16} />
             </Link>
           </div>
         </section>
 
-        <section className="pull-quote">
+        <section className="pull-quote reveal">
           <div className="shell">
             <blockquote>
               The best wildlife photographs come from showing up earlier than
-              you'd like, and waiting longer than feels reasonable.
+              you&rsquo;d like, and waiting longer than feels reasonable.
             </blockquote>
             <cite>Field notes · 2024</cite>
           </div>
         </section>
 
         {posts.length > 0 && (
-          <section className="section section-tight">
+          <section className="section section-tight reveal">
             <div className="shell">
               <div className="section-head">
                 <div>
                   <p className="eyebrow">From the journal</p>
                   <h2>
-                    Field notes & <em>trip writing.</em>
+                    Field notes & <span className="accent">trip writing.</span>
                   </h2>
                 </div>
                 <p className="lede">
                   Slow blog entries about what waiting in a hide teaches you, the
-                  weather of a forest, gear that should disappear, and the
-                  small decisions behind a photograph.
+                  weather of a forest, gear that should disappear, and the small
+                  decisions behind a photograph.
                 </p>
               </div>
               <div className="posts-grid">
@@ -161,7 +187,7 @@ export default async function Home() {
                   </Link>
                 ))}
               </div>
-              <Link className="section-link" href="/blog" style={{ marginTop: 32 }}>
+              <Link className="section-link" href="/blog" style={{ marginTop: 36 }}>
                 All field notes
                 <ArrowRight size={16} />
               </Link>
@@ -169,7 +195,7 @@ export default async function Home() {
           </section>
         )}
 
-        <section className="about-band">
+        <section className="about-band reveal">
           <div className="shell about-band-grid">
             <div className="about-portrait">
               <Image
@@ -183,18 +209,16 @@ export default async function Home() {
             <div>
               <p className="eyebrow">About</p>
               <h2>
-                A developer with a <em>field notebook.</em>
+                A developer with a <span className="accent">field notebook.</span>
               </h2>
               <p className="lede">
                 {profile.role}. Computer Science with AIML from SRM University.
-                The day job is back-end systems, databases, and cloud. The other
-                half of life is forests, dawn light, and the slow work of being
-                somewhere quietly enough to be invited in.
+                The day job is back-end systems, databases, and cloud. The
+                other half of life is forests, dawn light, and the slow work of
+                being somewhere quietly enough to be invited in.
               </p>
-              <p className="lede">
-                Based in {profile.base}.
-              </p>
-              <Link className="section-link" href="/about" style={{ marginTop: 24 }}>
+              <p className="lede">Based in {profile.base}.</p>
+              <Link className="section-link" href="/about" style={{ marginTop: 28 }}>
                 Read more about me
                 <ArrowRight size={16} />
               </Link>
