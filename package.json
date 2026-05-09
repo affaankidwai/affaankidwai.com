@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "scripts/run-node.sh ./node_modules/next/dist/bin/next dev --turbopack",
-    "build": "scripts/run-node.sh ./node_modules/next/dist/bin/next build --turbopack",
-    "start": "scripts/run-node.sh ./node_modules/next/dist/bin/next start",
-    "lint": "scripts/run-node.sh ./node_modules/eslint/bin/eslint.js",
-    "vercel": "HOME=\"$PWD/.vercel-home\" XDG_CACHE_HOME=\"$PWD/.vercel-cache\" scripts/run-node.sh ./node_modules/vercel/dist/vc.js"
+    "dev": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next dev --turbopack",
+    "build": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next build --turbopack",
+    "start": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next start",
+    "lint": "bash scripts/run-node.sh ./node_modules/eslint/bin/eslint.js",
+    "vercel": "HOME=\"$PWD/.vercel-home\" XDG_CACHE_HOME=\"$PWD/.vercel-cache\" bash scripts/run-node.sh ./node_modules/vercel/dist/vc.js"
   },
   "engines": {
     "node": "24.x"
