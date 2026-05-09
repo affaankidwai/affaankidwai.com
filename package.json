@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "node": "./node_modules/node-bin-darwin-arm64/bin/node",
-    "dev": "./node_modules/node-bin-darwin-arm64/bin/node ./node_modules/next/dist/bin/next dev --turbopack",
-    "build": "./node_modules/node-bin-darwin-arm64/bin/node ./node_modules/next/dist/bin/next build --turbopack",
-    "start": "./node_modules/node-bin-darwin-arm64/bin/node ./node_modules/next/dist/bin/next start",
-    "lint": "./node_modules/node-bin-darwin-arm64/bin/node ./node_modules/eslint/bin/eslint.js",
-    "vercel": "HOME=\"$PWD/.vercel-home\" XDG_CACHE_HOME=\"$PWD/.vercel-cache\" ./node_modules/node-bin-darwin-arm64/bin/node ./node_modules/vercel/dist/vc.js"
+    "dev": "scripts/run-node.sh ./node_modules/next/dist/bin/next dev --turbopack",
+    "build": "scripts/run-node.sh ./node_modules/next/dist/bin/next build --turbopack",
+    "start": "scripts/run-node.sh ./node_modules/next/dist/bin/next start",
+    "lint": "scripts/run-node.sh ./node_modules/eslint/bin/eslint.js",
+    "vercel": "HOME=\"$PWD/.vercel-home\" XDG_CACHE_HOME=\"$PWD/.vercel-cache\" scripts/run-node.sh ./node_modules/vercel/dist/vc.js"
   },
   "engines": {
     "node": "24.x"
@@ -26,8 +25,10 @@
     "@tailwindcss/postcss": "^4.3.0",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.6",
+    "tailwindcss": "^4.3.0"
+  },
+  "optionalDependencies": {
     "node-bin-darwin-arm64": "^24.15.0",
-    "tailwindcss": "^4.3.0",
     "vercel": "^53.2.0"
   }
 }
