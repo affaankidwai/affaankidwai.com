@@ -1,36 +1,208 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Binoculars, Camera, Database, Leaf, Map, Music2, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 import { SiteHeader } from "./components/SiteHeader";
-import { featuredPhotos, fieldNotes, profile, upcomingInterests } from "./data";
+import { SiteFooter } from "./components/SiteFooter";
+import { HeroRotator } from "./components/HeroRotator";
+import {
+  featuredPhotos,
+  heroRotation,
+  photoSrc,
+  profile,
+} from "./data";
+import { getAllPosts, formatPostDate } from "../lib/posts";
 
-export default function Home() {
+const layoutClasses = [
+  "is-large",
+  "is-tall",
+  "is-wide",
+  "is-medium",
+  "is-short",
+  "is-short",
+];
+
+export default async function Home() {
+  const posts = (await getAllPosts()).slice(0, 3);
+  const featured = featuredPhotos.slice(0, 6);
+
   return (
-    <main>
+    <>
       <SiteHeader />
-      <section className="hero-section">
-        <div className="hero-media" aria-hidden="true">
-          <Image src={featuredPhotos[0].image} alt="" width={1800} height={1200} className="hero-image" priority />
-          <div className="lens-orbit lens-orbit-one" /><div className="lens-orbit lens-orbit-two" />
-        </div>
-        <div className="hero-content">
-          <p className="eyebrow"><Leaf size={16} /> affaankidwai.com</p>
-          <h1>Affaan Kidwai</h1>
-          <p className="hero-copy">A developer with a field notebook, building a blue-green corner of the web for wildlife photographs, travel stories, and the quiet patience behind a memorable frame.</p>
-          <div className="hero-actions"><Link className="primary-action" href="/photography">Enter photography <ArrowRight size={18} /></Link><Link className="secondary-action" href="/about">About Affaan</Link></div>
-        </div>
-        <aside className="hero-panel" aria-label="Profile snapshot"><span>Oracle application developer</span><strong>Computer Science + AIML</strong><p>{profile.location}</p></aside>
-      </section>
+      <main>
+        <section className="hero">
+          <HeroRotator photos={heroRotation} />
+          <div className="shell hero-copy">
+            <p className="eyebrow">Wildlife photography · India</p>
+            <h1>
+              Frames from forests <em>that don't hurry.</em>
+            </h1>
+            <p className="lede">
+              I'm Affaan — a developer with a field notebook. This is where I
+              keep the photographs and the long, slow stories that come with
+              waiting in a hide before sunrise.
+            </p>
+            <div className="hero-actions">
+              <Link className="btn-primary" href="/photography">
+                See the gallery
+                <ArrowRight size={16} />
+              </Link>
+              <Link className="btn-ghost" href="/blog">
+                Read the field notes
+              </Link>
+            </div>
+          </div>
+          <div className="hero-meta">
+            <span>India · 2024–25</span>
+            <span>{`${featuredPhotos.length} featured · ${heroRotation.length} on rotation`}</span>
+          </div>
+          <span className="hero-scroll-cue">
+            Scroll
+            <ArrowDown size={12} />
+          </span>
+        </section>
 
-      <section className="section-shell intro-grid"><div><p className="eyebrow"><Sparkles size={16} /> The first world</p><h2>Wildlife first, with room for every obsession later.</h2></div><p>This version gives the photography section the spotlight: top images, trip journals, field notes, and a visual language that feels close to forests, water, low light, and movement. Cars, music, cards, and travel can slide in next without disturbing the main identity.</p></section>
+        <section className="section">
+          <div className="shell">
+            <div className="section-head">
+              <div>
+                <p className="eyebrow">Selected work</p>
+                <h2>
+                  A small set of <em>frames</em> I keep coming back to.
+                </h2>
+              </div>
+              <p className="lede">
+                These are the photographs that taught me something — about
+                patience, about light, about how the smallest creature in the
+                frame can still hold the whole forest still.
+              </p>
+            </div>
+            <div className="featured-grid">
+              {featured.map((photo, index) => (
+                <Link
+                  key={photo.id}
+                  href="/photography"
+                  className={`featured-card ${layoutClasses[index] ?? "is-medium"}`}
+                  aria-label={photo.title || photo.id}
+                >
+                  <Image
+                    src={photoSrc(photo)}
+                    alt={photo.title || photo.subject || "Wildlife photograph"}
+                    width={photo.width}
+                    height={photo.height}
+                    sizes="(max-width: 1000px) 100vw, 50vw"
+                  />
+                  {(photo.title || photo.subject) && (
+                    <div className="meta">
+                      {photo.title && <strong>{photo.title}</strong>}
+                      <span>{photo.subject || photo.place}</span>
+                    </div>
+                  )}
+                </Link>
+              ))}
+            </div>
+            <Link className="section-link" href="/photography" style={{ marginTop: 32 }}>
+              Enter the full archive
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        </section>
 
-      <section className="marquee-band" aria-label="Future interests"><div className="marquee-track">{[...upcomingInterests, ...upcomingInterests].map((interest, index) => <span key={`${interest}-${index}`}>{interest === "Music" ? <Music2 size={18} /> : <Map size={18} />}{interest}</span>)}</div></section>
+        <section className="pull-quote">
+          <div className="shell">
+            <blockquote>
+              The best wildlife photographs come from showing up earlier than
+              you'd like, and waiting longer than feels reasonable.
+            </blockquote>
+            <cite>Field notes · 2024</cite>
+          </div>
+        </section>
 
-      <section className="section-shell feature-split"><div className="photo-stack">{featuredPhotos.slice(0, 3).map((photo, index) => <article className="stack-card" key={photo.title}><Image src={photo.image} alt={`${photo.title} wildlife scene`} width={900} height={600} /><div><span>{`0${index + 1}`}</span><strong>{photo.title}</strong></div></article>)}</div><div className="feature-copy"><p className="eyebrow"><Camera size={16} /> Photography system</p><h2>Gallery, journal, and story structure in one place.</h2><p>Each image has room for title, place, species, and mood. Each trip can become a blog-style entry with photos attached, field notes, and the kind of context that makes the photograph feel lived in.</p><Link className="text-link" href="/photography">Explore the photo world <ArrowRight size={17} /></Link></div></section>
+        {posts.length > 0 && (
+          <section className="section section-tight">
+            <div className="shell">
+              <div className="section-head">
+                <div>
+                  <p className="eyebrow">From the journal</p>
+                  <h2>
+                    Field notes & <em>trip writing.</em>
+                  </h2>
+                </div>
+                <p className="lede">
+                  Slow blog entries about what waiting in a hide teaches you, the
+                  weather of a forest, gear that should disappear, and the
+                  small decisions behind a photograph.
+                </p>
+              </div>
+              <div className="posts-grid">
+                {posts.map((post) => (
+                  <Link key={post.slug} className="post-card" href={`/blog/${post.slug}`}>
+                    {post.cover && (
+                      <div className="post-cover">
+                        <Image
+                          src={post.cover}
+                          alt=""
+                          width={900}
+                          height={600}
+                          sizes="(max-width: 1000px) 100vw, 33vw"
+                        />
+                      </div>
+                    )}
+                    <div className="post-meta">
+                      <span>{formatPostDate(post.date)}</span>
+                      {post.location && (
+                        <>
+                          <span className="dot">·</span>
+                          <span>{post.location}</span>
+                        </>
+                      )}
+                    </div>
+                    <h3>{post.title}</h3>
+                    {post.summary && <p>{post.summary}</p>}
+                  </Link>
+                ))}
+              </div>
+              <Link className="section-link" href="/blog" style={{ marginTop: 32 }}>
+                All field notes
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </section>
+        )}
 
-      <section className="section-shell note-section"><div className="section-heading-row"><div><p className="eyebrow"><Binoculars size={16} /> Latest field notes</p><h2>Trip writing that can grow around the photographs.</h2></div><Link className="ghost-button" href="/photography#journal">View journal</Link></div><div className="note-grid">{fieldNotes.map((note) => <article className="note-card" key={note.slug}><Image src={note.image} alt="" width={900} height={600} /><div className="note-card-body"><span>{note.date}</span><h3>{note.title}</h3><p>{note.summary}</p></div></article>)}</div></section>
-
-      <section className="section-shell profile-band"><Database size={24} /><p>From the LinkedIn profile: {profile.role}, trained in {profile.education}, with strengths across back-end web development, database systems, cloud operations, React, and machine learning.</p></section>
-    </main>
+        <section className="about-band">
+          <div className="shell about-band-grid">
+            <div className="about-portrait">
+              <Image
+                src={photoSrc(featured[0])}
+                alt="Affaan Kidwai's photography"
+                width={featured[0].width}
+                height={featured[0].height}
+                sizes="(max-width: 1000px) 100vw, 50vw"
+              />
+            </div>
+            <div>
+              <p className="eyebrow">About</p>
+              <h2>
+                A developer with a <em>field notebook.</em>
+              </h2>
+              <p className="lede">
+                {profile.role}. Computer Science with AIML from SRM University.
+                The day job is back-end systems, databases, and cloud. The other
+                half of life is forests, dawn light, and the slow work of being
+                somewhere quietly enough to be invited in.
+              </p>
+              <p className="lede">
+                Based in {profile.base}.
+              </p>
+              <Link className="section-link" href="/about" style={{ marginTop: 24 }}>
+                Read more about me
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+      <SiteFooter />
+    </>
   );
 }
