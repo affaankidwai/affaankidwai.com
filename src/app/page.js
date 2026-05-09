@@ -1,40 +1,37 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowDown } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowDown,
+  Camera,
+  Car,
+  Code2,
+  Map,
+  Music2,
+  Spade,
+} from "lucide-react";
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "./components/SiteFooter";
 import { HeroRotator } from "./components/HeroRotator";
 import {
-  featuredPhotos,
   heroRotation,
   photoSrc,
   profile,
+  pursuits,
 } from "./data";
 import { getAllPosts, formatPostDate } from "../lib/posts";
 
-const layoutClasses = [
-  "is-large",
-  "is-tall",
-  "is-wide",
-  "is-medium",
-  "is-short",
-  "is-short",
-];
-
-const subjects = [
-  "Bengal Tiger",
-  "White-throated Kingfisher",
-  "Paradise Flycatcher",
-  "Pond Heron",
-  "Ruddy Shelduck",
-  "Stone-curlew",
-  "Song Thrush",
-  "Bluethroat",
-];
+const pursuitIcons = {
+  photography: Camera,
+  tech: Code2,
+  travel: Map,
+  cars: Car,
+  music: Music2,
+  cards: Spade,
+};
 
 export default async function Home() {
   const posts = (await getAllPosts()).slice(0, 3);
-  const featured = featuredPhotos.slice(0, 6);
 
   return (
     <>
@@ -43,30 +40,31 @@ export default async function Home() {
         <section className="hero">
           <HeroRotator photos={heroRotation} />
           <div className="shell hero-copy">
-            <p className="eyebrow">Wildlife photography · India</p>
+            <p className="eyebrow">Lucknow · Bengaluru · India</p>
             <h1>
-              Frames from forests
+              Hi, I&rsquo;m
               <br />
-              <span className="accent">that don&rsquo;t hurry.</span>
+              <span className="accent">Affaan Kidwai.</span>
             </h1>
             <p className="lede">
-              I&rsquo;m Affaan — a developer with a field notebook. This is where
-              I keep the photographs and the long, slow stories that come with
-              waiting in a hide before sunrise.
+              I build back-end systems at Oracle by day, photograph wildlife
+              in Indian forests by weekend, and spend the rest of my time on
+              cars, cards, music, and the road. This site is where I keep
+              all of it.
             </p>
             <div className="hero-actions">
               <Link className="btn-primary" href="/photography">
-                See the gallery
+                See the photography
                 <ArrowRight size={16} />
               </Link>
-              <Link className="btn-ghost" href="/blog">
-                Read the field notes
+              <Link className="btn-ghost" href="#about">
+                About me
               </Link>
             </div>
           </div>
           <div className="hero-meta">
-            <span>India · 2024–25</span>
-            <span>{`${featuredPhotos.length} featured · ${heroRotation.length} on rotation`}</span>
+            <span>Developer · Photographer</span>
+            <span>{`Oracle · since ${profile.roleSince.split(" ")[1]}`}</span>
           </div>
           <span className="hero-scroll-cue">
             Scroll
@@ -74,72 +72,125 @@ export default async function Home() {
           </span>
         </section>
 
-        <section className="subjects-band" aria-label="Subjects in the archive">
-          <div className="subjects-track">
-            {[...subjects, ...subjects].map((subject, index) => (
-              <span
-                key={`${subject}-${index}`}
-                className={index % 2 === 0 ? "" : "muted"}
-              >
-                {subject}
-              </span>
-            ))}
+        <section id="about" className="about-snippet reveal">
+          <div className="shell about-snippet-grid">
+            <div>
+              <p className="eyebrow">About</p>
+              <h2>
+                Code by day,
+                <br />
+                <span className="accent">forests by weekend.</span>
+              </h2>
+              <p className="lede">
+                I&rsquo;m an <strong>Associate Application Developer at{" "}
+                {profile.company}</strong>, working on back-end systems out of
+                Bengaluru. I graduated from <strong>SRM University</strong> in
+                2024 with a B.Tech in Computer Science with AIML
+                specialisation.
+              </p>
+              <p className="lede">
+                Off the keyboard, I&rsquo;m usually somewhere with a camera —
+                most often a forest, sometimes a city, often a road. The other
+                tabs in my head: cars, music, card games, the next trip.
+              </p>
+              <Link className="section-link" href="/about" style={{ marginTop: 22 }}>
+                Read the longer version
+                <ArrowRight size={16} />
+              </Link>
+            </div>
+            <aside className="about-snippet-stats">
+              <div className="stat-card">
+                <h4>Day job</h4>
+                <strong>{profile.role}</strong>
+                <span>{profile.company}</span>
+              </div>
+              <div className="stat-card">
+                <h4>Education</h4>
+                <strong>B.Tech, CS with AIML</strong>
+                <span>SRM University · 2020 – 2024</span>
+              </div>
+              <div className="stat-card">
+                <h4>Based in</h4>
+                <strong>Bengaluru</strong>
+                <span>Originally Lucknow</span>
+              </div>
+              <div className="stat-card stat-card-tags">
+                <h4>Top skills</h4>
+                <ul>
+                  {profile.topSkills.map((skill) => (
+                    <li key={skill}>{skill}</li>
+                  ))}
+                </ul>
+              </div>
+            </aside>
           </div>
         </section>
 
-        <section className="section reveal">
+        <section className="section reveal" id="worlds">
           <div className="shell">
             <div className="section-head">
               <div>
-                <p className="eyebrow">Selected work</p>
+                <p className="eyebrow">The worlds I keep</p>
                 <h2>
-                  A small set of frames I keep <span className="accent">coming back to.</span>
+                  Six things I&rsquo;m into.
+                  <br />
+                  <span className="accent">One is already here.</span>
                 </h2>
               </div>
               <p className="lede">
-                These are the photographs that taught me something — about
-                patience, about light, about how the smallest creature in the
-                frame can still hold the whole forest still.
+                Photography is the most built-out corner so far. The rest are
+                drafts in my head — they&rsquo;ll get their own sections as I
+                write things down.
               </p>
             </div>
-            <div className="featured-grid">
-              {featured.map((photo, index) => (
-                <Link
-                  key={photo.id}
-                  href="/photography"
-                  className={`featured-card ${layoutClasses[index] ?? "is-medium"}`}
-                  aria-label={photo.title || photo.id}
-                >
-                  <Image
-                    src={photoSrc(photo)}
-                    alt={photo.title || photo.subject || "Wildlife photograph"}
-                    width={photo.width}
-                    height={photo.height}
-                    sizes="(max-width: 1000px) 100vw, 50vw"
-                  />
-                  {(photo.title || photo.subject) && (
-                    <div className="meta">
-                      {photo.title && <strong>{photo.title}</strong>}
-                      <span>{photo.subject || photo.place}</span>
+            <div className="pursuits-grid">
+              {pursuits.map((pursuit) => {
+                const Icon = pursuitIcons[pursuit.slug];
+                const isLive = pursuit.status === "live";
+                const TileTag = isLive ? Link : "div";
+                const tagProps = isLive ? { href: pursuit.href } : {};
+                return (
+                  <TileTag
+                    key={pursuit.slug}
+                    className={`pursuit-tile ${isLive ? "is-live" : "is-soon"}`}
+                    {...tagProps}
+                  >
+                    {isLive && pursuit.cover && (
+                      <Image
+                        className="pursuit-cover"
+                        src={pursuit.cover}
+                        alt=""
+                        width={1600}
+                        height={1066}
+                        sizes="(max-width: 1000px) 100vw, 50vw"
+                      />
+                    )}
+                    <div className="pursuit-body">
+                      <div className="pursuit-top">
+                        <span className="pursuit-icon">
+                          {Icon && <Icon size={18} strokeWidth={1.6} />}
+                        </span>
+                        <span className="pursuit-status">
+                          {isLive ? pursuit.detail : "Coming soon"}
+                        </span>
+                      </div>
+                      <p className="pursuit-eyebrow">{pursuit.eyebrow}</p>
+                      <h3>{pursuit.title}</h3>
+                      <p className="pursuit-desc">{pursuit.description}</p>
+                      {isLive ? (
+                        <span className="pursuit-cta">
+                          Enter <ArrowRight size={14} />
+                        </span>
+                      ) : (
+                        <span className="pursuit-cta pursuit-cta-soon">
+                          Drafting
+                        </span>
+                      )}
                     </div>
-                  )}
-                </Link>
-              ))}
+                  </TileTag>
+                );
+              })}
             </div>
-            <Link className="section-link" href="/photography" style={{ marginTop: 36 }}>
-              Enter the full archive
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-        </section>
-
-        <section className="pull-quote reveal">
-          <div className="shell">
-            <blockquote>
-              The best wildlife photographs come from showing up earlier than
-              you&rsquo;d like, and waiting longer than feels reasonable.
-            </blockquote>
-            <cite>Field notes · 2024</cite>
           </div>
         </section>
 
@@ -150,13 +201,14 @@ export default async function Home() {
                 <div>
                   <p className="eyebrow">From the journal</p>
                   <h2>
-                    Field notes & <span className="accent">trip writing.</span>
+                    Field notes &<br />
+                    <span className="accent">trip writing.</span>
                   </h2>
                 </div>
                 <p className="lede">
-                  Slow blog entries about what waiting in a hide teaches you, the
-                  weather of a forest, gear that should disappear, and the small
-                  decisions behind a photograph.
+                  Slow blog entries about waiting in a hide, the weather of a
+                  forest, gear that should disappear, and the small decisions
+                  behind a photograph.
                 </p>
               </div>
               <div className="posts-grid">
@@ -195,33 +247,20 @@ export default async function Home() {
           </section>
         )}
 
-        <section className="about-band reveal">
-          <div className="shell about-band-grid">
-            <div className="about-portrait">
-              <Image
-                src={photoSrc(featured[0])}
-                alt="Affaan Kidwai's photography"
-                width={featured[0].width}
-                height={featured[0].height}
-                sizes="(max-width: 1000px) 100vw, 50vw"
-              />
-            </div>
-            <div>
-              <p className="eyebrow">About</p>
-              <h2>
-                A developer with a <span className="accent">field notebook.</span>
-              </h2>
-              <p className="lede">
-                {profile.role}. Computer Science with AIML from SRM University.
-                The day job is back-end systems, databases, and cloud. The
-                other half of life is forests, dawn light, and the slow work of
-                being somewhere quietly enough to be invited in.
-              </p>
-              <p className="lede">Based in {profile.base}.</p>
-              <Link className="section-link" href="/about" style={{ marginTop: 28 }}>
-                Read more about me
-                <ArrowRight size={16} />
-              </Link>
+        <section className="contact-band reveal">
+          <div className="shell-narrow">
+            <p className="eyebrow">Get in touch</p>
+            <h2>
+              For prints, projects, or just a conversation about
+              <span className="accent"> tigers and tech.</span>
+            </h2>
+            <div className="contact-actions">
+              <a className="btn-primary" href={`mailto:${profile.email}`}>
+                {profile.email}
+              </a>
+              <a className="btn-ghost" href={profile.linkedin} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
             </div>
           </div>
         </section>

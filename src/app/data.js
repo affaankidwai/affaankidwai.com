@@ -5,11 +5,31 @@
 
 export const profile = {
   name: "Affaan Kidwai",
+  firstName: "Affaan",
   email: "kidwaiaffaan@gmail.com",
   linkedin: "https://www.linkedin.com/in/affaankidwai",
-  role: "Associate Application Developer at Oracle Financial Services Software",
-  base: "Lucknow & Bengaluru, India",
-  education: "B.Tech, Computer Science with AIML — SRM University",
+  role: "Associate Application Developer",
+  company: "Oracle Financial Services Software",
+  roleSince: "June 2024",
+  hometown: "Lucknow, Uttar Pradesh",
+  base: "Bengaluru, Karnataka",
+  education: [
+    {
+      school: "SRM University",
+      degree: "B.Tech, Computer Science with AIML specialisation",
+      years: "2020 – 2024",
+    },
+    {
+      school: "Delhi Public School, India",
+      degree: "Class 12, PCM",
+      years: "until 2020",
+    },
+  ],
+  topSkills: [
+    "Back-end web development",
+    "Database management",
+    "Oracle Database",
+  ],
   skills: [
     "Back-end web development",
     "Database systems",
@@ -18,7 +38,70 @@ export const profile = {
     "Cloud operations",
     "Machine learning",
   ],
+  certifications: [
+    "Advanced React",
+    "Web Development Bootcamp",
+    "AWS Academy Cloud Operations",
+    "Machine Learning A-Z",
+    "Database Foundations",
+  ],
 };
+
+// The "worlds" surfaced on the home page. Photography is live and links to
+// the gallery; the rest are placeholders Affaan will fill in over time.
+export const pursuits = [
+  {
+    slug: "photography",
+    title: "Photography",
+    eyebrow: "Wildlife · India",
+    description:
+      "Bengal tigers from the dry forest. Kingfishers in winter light. Paradise flycatchers through tangled branches. Frames I keep coming back to.",
+    href: "/photography",
+    cover: "/gallery/IMG_8409.jpg",
+    status: "live",
+    detail: "38 frames · 2024 – 25",
+  },
+  {
+    slug: "tech",
+    title: "Tech & Code",
+    eyebrow: "Backend · Databases · Cloud",
+    description:
+      "Notes on Oracle, AWS, React, and the systems I work on by day.",
+    status: "soon",
+  },
+  {
+    slug: "travel",
+    title: "Travel",
+    eyebrow: "Forests · Cities · Roads",
+    description:
+      "Trip writing from across India and beyond — places, weather, and the small details.",
+    status: "soon",
+  },
+  {
+    slug: "cars",
+    title: "Cars",
+    eyebrow: "Engines · Roads · Drives",
+    description:
+      "A long-running interest. Drives, builds, and the engines that get me out of bed.",
+    status: "soon",
+  },
+  {
+    slug: "music",
+    title: "Music",
+    eyebrow: "Listening · Notes",
+    description:
+      "Albums I keep returning to and concerts that mattered.",
+    status: "soon",
+  },
+  {
+    slug: "cards",
+    title: "Cards",
+    eyebrow: "Games · Strategy",
+    description:
+      "The card games I play and the hands I won't forget.",
+    status: "soon",
+  },
+];
 
 // Photo entries. Width/Height are the post-resize dimensions (next/image needs
 // them for layout). Subject/place are optional — leave blank if you don't want

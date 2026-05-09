@@ -8,11 +8,11 @@ export function SiteFooter() {
         <div>
           <h4>Affaan Kidwai</h4>
           <h3>
-            Slow looking, <span className="accent">quiet frames.</span>
+            Developer, <span className="accent">photographer.</span>
           </h3>
           <p>
-            A personal corner of the web for wildlife photographs from Indian
-            forests, trip journals, and the patience behind a memorable frame.
+            A personal corner of the web for the work I do, the photographs I
+            make, and the worlds I&rsquo;ll keep adding to over time.
           </p>
         </div>
         <div>
