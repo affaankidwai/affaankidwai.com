@@ -19,14 +19,11 @@ export default function PhotographyPage() {
       <main>
         <section className="page-hero">
           <div className="shell">
-            <p className="eyebrow">The archive</p>
-            <h1>
-              All <span className="accent">frames,</span> in one place.
-            </h1>
+            <p className="eyebrow">Photography</p>
+            <h1>The archive.</h1>
             <p className="lede">
-              Tigers from the dry forest. Birds from monsoon canopies and lake
-              edges. The full archive of photographs I keep coming back to,
-              tap any frame to look closer.
+              Tigers from the dry forest, birds from lake edges, the
+              occasional songbird. Tap any frame to look closer.
             </p>
             <div className="stats">
               <div>

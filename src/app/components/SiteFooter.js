@@ -7,12 +7,10 @@ export function SiteFooter() {
       <div className="shell footer-grid">
         <div>
           <h4>Affaan Kidwai</h4>
-          <h3>
-            Developer, <span className="accent">photographer.</span>
-          </h3>
+          <h3>Developer, photographer.</h3>
           <p>
-            A personal corner of the web for the work I do, the photographs I
-            make, and the worlds I&rsquo;ll keep adding to over time.
+            A personal corner of the web for the work, the photographs, and
+            the worlds I&rsquo;ll add to over time.
           </p>
         </div>
         <div>

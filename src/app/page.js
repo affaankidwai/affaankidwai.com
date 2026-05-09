@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight,
-  ArrowDown,
   Camera,
   Car,
   Code2,
@@ -12,9 +11,8 @@ import {
 } from "lucide-react";
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "./components/SiteFooter";
-import { HeroRotator } from "./components/HeroRotator";
 import {
-  heroRotation,
+  heroPhoto,
   photoSrc,
   profile,
   pursuits,
@@ -38,19 +36,24 @@ export default async function Home() {
       <SiteHeader />
       <main>
         <section className="hero">
-          <HeroRotator photos={heroRotation} />
+          <div className="hero-stage">
+            <Image
+              src={photoSrc(heroPhoto)}
+              alt=""
+              width={heroPhoto.width}
+              height={heroPhoto.height}
+              priority
+              sizes="100vw"
+              className="hero-still"
+            />
+          </div>
           <div className="shell hero-copy">
-            <p className="eyebrow">Lucknow · Bengaluru · India</p>
-            <h1>
-              Hi, I&rsquo;m
-              <br />
-              <span className="accent">Affaan Kidwai.</span>
-            </h1>
+            <p className="eyebrow">Lucknow · Bengaluru</p>
+            <h1>Affaan Kidwai.</h1>
             <p className="lede">
-              I build back-end systems at Oracle by day, photograph wildlife
-              in Indian forests by weekend, and spend the rest of my time on
-              cars, cards, music, and the road. This site is where I keep
-              all of it.
+              Associate Application Developer at Oracle Financial Services
+              Software. Wildlife photographer in Indian forests. This is where
+              I keep the work, the photographs, and the field notes.
             </p>
             <div className="hero-actions">
               <Link className="btn-primary" href="/photography">
@@ -58,49 +61,36 @@ export default async function Home() {
                 <ArrowRight size={16} />
               </Link>
               <Link className="btn-ghost" href="#about">
-                About me
+                About
               </Link>
             </div>
           </div>
-          <div className="hero-meta">
-            <span>Developer · Photographer</span>
-            <span>{`Oracle · since ${profile.roleSince.split(" ")[1]}`}</span>
-          </div>
-          <span className="hero-scroll-cue">
-            Scroll
-            <ArrowDown size={12} />
-          </span>
         </section>
 
-        <section id="about" className="about-snippet reveal">
+        <section id="about" className="about-snippet">
           <div className="shell about-snippet-grid">
             <div>
               <p className="eyebrow">About</p>
-              <h2>
-                Code by day,
-                <br />
-                <span className="accent">forests by weekend.</span>
-              </h2>
+              <h2>Two careers, one calendar.</h2>
               <p className="lede">
-                I&rsquo;m an <strong>Associate Application Developer at{" "}
-                {profile.company}</strong>, working on back-end systems out of
-                Bengaluru. I graduated from <strong>SRM University</strong> in
-                2024 with a B.Tech in Computer Science with AIML
-                specialisation.
+                I&rsquo;m a back-end engineer at{" "}
+                <strong>{profile.company}</strong> in Bengaluru, with a B.Tech
+                in Computer Science with AIML from <strong>SRM University</strong>.
+                Off the keyboard, I photograph wildlife — most often Bengal
+                tigers and the smaller birds you have to wait for.
               </p>
               <p className="lede">
-                Off the keyboard, I&rsquo;m usually somewhere with a camera —
-                most often a forest, sometimes a city, often a road. The other
-                tabs in my head: cars, music, card games, the next trip.
+                Originally from Lucknow. The other tabs in my head: cars,
+                travel, music, cards.
               </p>
-              <Link className="section-link" href="/about" style={{ marginTop: 22 }}>
-                Read the longer version
+              <Link className="section-link" href="/about" style={{ marginTop: 18 }}>
+                Read more
                 <ArrowRight size={16} />
               </Link>
             </div>
             <aside className="about-snippet-stats">
               <div className="stat-card">
-                <h4>Day job</h4>
+                <h4>Currently</h4>
                 <strong>{profile.role}</strong>
                 <span>{profile.company}</span>
               </div>
@@ -109,13 +99,8 @@ export default async function Home() {
                 <strong>B.Tech, CS with AIML</strong>
                 <span>SRM University · 2020 – 2024</span>
               </div>
-              <div className="stat-card">
-                <h4>Based in</h4>
-                <strong>Bengaluru</strong>
-                <span>Originally Lucknow</span>
-              </div>
               <div className="stat-card stat-card-tags">
-                <h4>Top skills</h4>
+                <h4>Skills</h4>
                 <ul>
                   {profile.topSkills.map((skill) => (
                     <li key={skill}>{skill}</li>
@@ -126,21 +111,16 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="section reveal" id="worlds">
+        <section className="section" id="worlds">
           <div className="shell">
             <div className="section-head">
               <div>
-                <p className="eyebrow">The worlds I keep</p>
-                <h2>
-                  Six things I&rsquo;m into.
-                  <br />
-                  <span className="accent">One is already here.</span>
-                </h2>
+                <p className="eyebrow">Worlds</p>
+                <h2>Six things I&rsquo;m into.</h2>
               </div>
               <p className="lede">
-                Photography is the most built-out corner so far. The rest are
-                drafts in my head — they&rsquo;ll get their own sections as I
-                write things down.
+                Photography is the only one with a real page right now. The
+                rest will come over time.
               </p>
             </div>
             <div className="pursuits-grid">
@@ -168,10 +148,10 @@ export default async function Home() {
                     <div className="pursuit-body">
                       <div className="pursuit-top">
                         <span className="pursuit-icon">
-                          {Icon && <Icon size={18} strokeWidth={1.6} />}
+                          {Icon && <Icon size={16} strokeWidth={1.6} />}
                         </span>
                         <span className="pursuit-status">
-                          {isLive ? pursuit.detail : "Coming soon"}
+                          {isLive ? pursuit.detail : "Soon"}
                         </span>
                       </div>
                       <p className="pursuit-eyebrow">{pursuit.eyebrow}</p>
@@ -195,20 +175,16 @@ export default async function Home() {
         </section>
 
         {posts.length > 0 && (
-          <section className="section section-tight reveal">
+          <section className="section section-tight">
             <div className="shell">
               <div className="section-head">
                 <div>
-                  <p className="eyebrow">From the journal</p>
-                  <h2>
-                    Field notes &<br />
-                    <span className="accent">trip writing.</span>
-                  </h2>
+                  <p className="eyebrow">Field Notes</p>
+                  <h2>Trip writing, slowly.</h2>
                 </div>
                 <p className="lede">
-                  Slow blog entries about waiting in a hide, the weather of a
-                  forest, gear that should disappear, and the small decisions
-                  behind a photograph.
+                  Notes from forests, lake edges, and the long waits behind a
+                  photograph.
                 </p>
               </div>
               <div className="posts-grid">
@@ -239,7 +215,7 @@ export default async function Home() {
                   </Link>
                 ))}
               </div>
-              <Link className="section-link" href="/blog" style={{ marginTop: 36 }}>
+              <Link className="section-link" href="/blog" style={{ marginTop: 28 }}>
                 All field notes
                 <ArrowRight size={16} />
               </Link>
@@ -247,13 +223,13 @@ export default async function Home() {
           </section>
         )}
 
-        <section className="contact-band reveal">
+        <section className="contact-band">
           <div className="shell-narrow">
-            <p className="eyebrow">Get in touch</p>
-            <h2>
-              For prints, projects, or just a conversation about
-              <span className="accent"> tigers and tech.</span>
-            </h2>
+            <p className="eyebrow">Contact</p>
+            <h2>Say hi.</h2>
+            <p className="lede">
+              For prints, projects, or just a conversation — drop a line.
+            </p>
             <div className="contact-actions">
               <a className="btn-primary" href={`mailto:${profile.email}`}>
                 {profile.email}

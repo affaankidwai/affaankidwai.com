@@ -21,13 +21,10 @@ export default async function BlogIndex() {
         <section className="page-hero">
           <div className="shell">
             <p className="eyebrow">Field Notes</p>
-            <h1>
-              The <span className="accent">slow part</span> of wildlife photography, written down.
-            </h1>
+            <h1>Trip writing, slowly.</h1>
             <p className="lede">
-              Trip journals, weather notes, gear thoughts, and the small
-              decisions that shape a photograph. Written when there's time, not
-              on a schedule.
+              Notes from forests, lake edges, and the long waits behind a
+              photograph. Written when there&rsquo;s time, not on a schedule.
             </p>
           </div>
         </section>

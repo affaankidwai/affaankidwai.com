@@ -108,6 +108,15 @@ export const pursuits = [
 // a label, the UI handles that gracefully.
 export const photos = [
   {
+    id: "IMG_0757",
+    title: "On the trail",
+    subject: "Bengal Tiger",
+    place: "Central India",
+    width: 2400,
+    height: 1547,
+    featured: true,
+  },
+  {
     id: "IMG_8409",
     title: "Eyes of the dry forest",
     subject: "Bengal Tiger",
@@ -263,11 +272,7 @@ export function photoLabel(photo, index) {
 
 export const featuredPhotos = photos.filter((p) => p.featured);
 
-// First featured photo, used as the about-page portrait fallback and as the
-// primary hero image.
-export const heroPhoto = photos.find((p) => p.id === "IMG_8409") ?? photos[0];
-
-// Used by the home page hero rotation (cinematic crossfade).
-export const heroRotation = ["IMG_8409", "IMG_9492", "IMG_8364", "IMG_0198"]
-  .map((id) => photos.find((p) => p.id === id))
-  .filter(Boolean);
+// The single static hero image on the home page. Change this `id` to swap
+// the photo, or set `featured: true` on a different photo above.
+export const heroPhoto =
+  photos.find((p) => p.id === "IMG_0757") ?? photos[0];

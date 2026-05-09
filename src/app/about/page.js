@@ -17,16 +17,12 @@ export default function AboutPage() {
         <section className="about-page-hero">
           <div className="shell">
             <p className="eyebrow">About</p>
-            <h1>
-              Developer mind,
-              <br />
-              <span className="accent">wildlife eye.</span>
-            </h1>
+            <h1>Affaan Kidwai.</h1>
             <p className="lede">
               Associate Application Developer at {profile.company}. Computer
               Science with AIML graduate from SRM University. The day job is
-              back-end web development, databases, and cloud. The other half
-              of life is forests, dawn light, and slow looking.
+              back-end systems and databases. The other half of life is
+              forests, dawn light, and slow looking.
             </p>
           </div>
         </section>
@@ -124,7 +120,7 @@ export default function AboutPage() {
         <section className="skills">
           <div className="shell">
             <p className="eyebrow">Day job · skills</p>
-            <h2>What I work on when I&rsquo;m not in a forest.</h2>
+            <h2>What I work on.</h2>
             <div className="skill-tags">
               {profile.skills.map((skill) => (
                 <span key={skill}>{skill}</span>
@@ -133,8 +129,8 @@ export default function AboutPage() {
             <p className="eyebrow" style={{ marginTop: 56 }}>
               Certifications
             </p>
-            <h2 style={{ fontSize: "clamp(1.6rem, 2.6vw, 2.2rem)" }}>
-              Coursework outside the day job.
+            <h2 style={{ fontSize: "clamp(1.4rem, 2.2vw, 1.8rem)" }}>
+              Coursework.
             </h2>
             <div className="skill-tags">
               {profile.certifications.map((cert) => (
