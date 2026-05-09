@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next dev --turbopack",
-    "build": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next build --turbopack",
-    "start": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next start",
-    "lint": "bash scripts/run-node.sh ./node_modules/eslint/bin/eslint.js",
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint",
+    "dev:bundled": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next dev --turbopack",
+    "build:bundled": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next build --turbopack",
     "vercel": "HOME=\"$PWD/.vercel-home\" XDG_CACHE_HOME=\"$PWD/.vercel-cache\" bash scripts/run-node.sh ./node_modules/vercel/dist/vc.js"
   },
   "engines": {
@@ -15,7 +17,7 @@
   "dependencies": {
     "lucide-react": "^1.14.0",
     "next": "^16.2.6",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "remark-gfm": "^4.0.1"
