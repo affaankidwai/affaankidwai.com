@@ -79,25 +79,33 @@ Then update DNS in Hostinger:
 
 ## Git setup
 
-There are two `.git` directories at the project root:
+The project has a single `.git/` pointing at
+`github.com/affaankidwai/affaankidwai.com.git`. Plain `git status`,
+`git add`, `git commit`, `git push` all just work — and so does the
+**Source Control** panel in VSCode (left sidebar, the icon that looks like
+a branching line). You can stage with checkboxes, type a message, click ✓,
+then click "Sync" (or use the `…` → "Push") to publish.
 
-- `.git/` — initial create-next-app state, no remote.
-- `.git-push/` — the working remote pointing at
-  `github.com/affaankidwai/affaankidwai.com.git`.
-
-To run a real `git` command against the deploy repo, use:
-
-```bash
-git --git-dir=.git-push --work-tree=. <command>
-```
-
-For example:
+If you ever see a directory called `.git.boilerplate-bak/`, that's the
+old empty `create-next-app` history from before the cleanup. It's
+gitignored and safe to delete:
 
 ```bash
-git --git-dir=.git-push --work-tree=. status
-git --git-dir=.git-push --work-tree=. add .
-git --git-dir=.git-push --work-tree=. commit -m "..."
-git --git-dir=.git-push --work-tree=. push
+rm -rf .git.boilerplate-bak
 ```
 
-(Cleaning these into a single `.git/` is a future tidy-up, not urgent.)
+## Quick command reference
+
+```bash
+# Local development (uses the bundled Node 24 binary):
+npm run dev:bundled
+
+# Production build (same):
+npm run build:bundled
+
+# Stage / commit / push:
+git status
+git add src/app/data.js
+git commit -m "Update photo titles"
+git push
+```

@@ -23,8 +23,7 @@
 # misc
 .DS_Store
 ._*
-.git
-.git-push
+.git.boilerplate-bak
 *.pem
 
 # original-size photos (kept locally; web-sized copies are committed in /public/gallery)
