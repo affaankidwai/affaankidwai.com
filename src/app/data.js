@@ -190,6 +190,16 @@ export const photos = [
     featured: true,
     favorite: true,
     fieldNote: "A long, quiet morning. We waited at a bend in the road as the alarm calls thinned out. Then he just appeared — walking the same line he'd walked the day before, his pace not changing for us. The frame is from his second step into open light.",
+    behindTheShot: {
+      scene:
+        "A narrow forest track in the central Indian dry deciduous belt. Late winter, low light, the smell of dust before any of us heard anything.",
+      wait:
+        "Just under two hours at the same bend, listening for alarm calls. They thinned out before they came back. We watched the road, then the slope, then the road again.",
+      shot:
+        "He stepped out about forty metres ahead, walked toward us without breaking stride, and held the line he'd walked the previous morning. I bumped ISO until the shutter would freeze him and let everything else fall away.",
+      learned:
+        "When you've already chosen the right place to wait, the only thing left to do is wait through the second silence. Almost every frame I'm proud of has come from that.",
+    },
     tags: ["tiger", "forest", "patrol", "morning"],
   },
   {

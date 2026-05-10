@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { photoSrc } from "../data";
 
-export function Gallery({ photos, categories = [] }) {
+export function Gallery({ photos, categories = [], showFilter = true }) {
   const [filter, setFilter] = useState("All");
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -45,7 +45,7 @@ export function Gallery({ photos, categories = [] }) {
 
   return (
     <>
-      {filterChips.length > 2 && (
+      {showFilter && filterChips.length > 2 && (
         <div className="gallery-filter" role="tablist" aria-label="Filter frames">
           {filterChips.map((chip) => (
             <button
@@ -90,14 +90,39 @@ export function Gallery({ photos, categories = [] }) {
                 alt={photo.title || photo.subject || "Wildlife photograph"}
                 width={photo.width}
                 height={photo.height}
-                sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                sizes="(max-width: 700px) 100vw, 50vw"
               />
-              {(photo.title || photo.subject) && (
-                <div className="meta">
-                  {photo.title && <strong>{photo.title}</strong>}
-                  {photo.subject || photo.place || ""}
-                </div>
-              )}
+              <div className="gallery-meta" aria-hidden="true">
+                {(photo.subject || photo.category) && (
+                  <span className="gallery-meta-eyebrow">
+                    {[photo.subject, photo.place].filter(Boolean).join(" · ") ||
+                      photo.category}
+                  </span>
+                )}
+                {(photo.title || photo.id) && (
+                  <strong className="gallery-meta-title">
+                    {photo.title || photo.id}
+                  </strong>
+                )}
+                {(photo.camera || photo.lens || photo.focal) && (
+                  <span className="gallery-meta-gear">
+                    {[photo.camera, [photo.lens, photo.focal].filter(Boolean).join(" · ")]
+                      .filter(Boolean)
+                      .join(" · ")}
+                  </span>
+                )}
+                {(photo.shutter || photo.aperture || photo.iso) && (
+                  <span className="gallery-meta-settings">
+                    {[
+                      photo.shutter,
+                      photo.aperture,
+                      photo.iso ? `ISO ${photo.iso}` : null,
+                    ]
+                      .filter(Boolean)
+                      .join("  ·  ")}
+                  </span>
+                )}
+              </div>
             </button>
           ))}
         </div>
@@ -118,6 +143,14 @@ export function Gallery({ photos, categories = [] }) {
 }
 
 function LightboxStage({ photo, index, total, onClose, onNext, onPrev }) {
+  const settings = [
+    photo.shutter,
+    photo.aperture,
+    photo.iso ? `ISO ${photo.iso}` : null,
+  ]
+    .filter(Boolean)
+    .join("  ·  ");
+
   return (
     <div
       className="lightbox"
@@ -128,30 +161,32 @@ function LightboxStage({ photo, index, total, onClose, onNext, onPrev }) {
       }}
     >
       <div className="lightbox-stage">
-        <Image
-          src={photoSrc(photo)}
-          alt={photo.title || photo.subject || "Wildlife photograph"}
-          width={photo.width}
-          height={photo.height}
-          priority
-        />
-        <div className="lightbox-meta">
-          <div>
+        <div className="lightbox-image">
+          <Image
+            src={photoSrc(photo)}
+            alt={photo.title || photo.subject || "Wildlife photograph"}
+            width={photo.width}
+            height={photo.height}
+            priority
+            sizes="80vw"
+          />
+        </div>
+        <div className="lightbox-caption">
+          <div className="lightbox-caption-text">
             {photo.title && <strong>{photo.title}</strong>}
             <span>
               {[photo.subject, photo.place].filter(Boolean).join(" · ") ||
                 photo.id}
+              {settings ? `  ·  ${settings}` : ""}
             </span>
           </div>
-          <Link
-            href={`/photos/${photo.slug}`}
-            className="lightbox-story-link"
-            onClick={(e) => e.stopPropagation()}
-          >
-            Read the story
-            <ArrowUpRight size={14} />
-          </Link>
-          <span>{`${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`}</span>
+          <div className="lightbox-caption-actions">
+            <span className="lightbox-counter">{`${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`}</span>
+            <Link href={`/photos/${photo.slug}`} className="lightbox-readmore">
+              Read more
+              <ArrowUpRight size={14} />
+            </Link>
+          </div>
         </div>
       </div>
       <button

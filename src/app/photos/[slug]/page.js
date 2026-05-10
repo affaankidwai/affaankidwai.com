@@ -110,6 +110,39 @@ export default async function PhotoPage({ params }) {
                     deciding what to write.
                   </p>
                 )}
+
+                {photo.behindTheShot && (
+                  <section className="behind-the-shot" aria-label="Behind the shot">
+                    <p className="eyebrow">Behind the shot</p>
+                    <dl>
+                      {photo.behindTheShot.scene && (
+                        <div>
+                          <dt>The scene</dt>
+                          <dd>{photo.behindTheShot.scene}</dd>
+                        </div>
+                      )}
+                      {photo.behindTheShot.wait && (
+                        <div>
+                          <dt>The wait</dt>
+                          <dd>{photo.behindTheShot.wait}</dd>
+                        </div>
+                      )}
+                      {photo.behindTheShot.shot && (
+                        <div>
+                          <dt>The shot</dt>
+                          <dd>{photo.behindTheShot.shot}</dd>
+                        </div>
+                      )}
+                      {photo.behindTheShot.learned && (
+                        <div>
+                          <dt>What I learned</dt>
+                          <dd>{photo.behindTheShot.learned}</dd>
+                        </div>
+                      )}
+                    </dl>
+                  </section>
+                )}
+
                 {Array.isArray(photo.tags) && photo.tags.length > 0 && (
                   <ul className="photo-tags">
                     {photo.tags.map((tag) => (
