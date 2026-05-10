@@ -1,41 +1,40 @@
-import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-
-const playfair = Playfair_Display({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
-
-const inter = Inter({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
+import "./polish.css";
 
 export const metadata = {
   metadataBase: new URL("https://affaankidwai.com"),
   title: {
-    default: "Affaan Kidwai — Wildlife Photography & Field Notes",
+    default: "Affaan Kidwai — Wildlife Photography & Journal",
     template: "%s · Affaan Kidwai",
   },
   description:
     "The personal site of Affaan Kidwai: wildlife photographs from Indian forests, slow trip journals, and the patience behind a memorable frame.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Affaan Kidwai — Wildlife Photography & Field Notes",
+    title: "Affaan Kidwai — Wildlife Photography & Journal",
     description:
       "Wildlife photographs from Indian forests, slow trip journals, and the patience behind a memorable frame.",
     type: "website",
     locale: "en_IN",
+    url: "https://affaankidwai.com",
+    siteName: "Affaan Kidwai",
+    images: [
+      {
+        url: "/gallery/IMG_0757.jpg",
+        width: 2400,
+        height: 1547,
+        alt: "A Bengal tiger walking on a forest trail.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Affaan Kidwai — Wildlife Photography & Journal",
+    description:
+      "Wildlife photographs from Indian forests, slow trip journals, and the patience behind a memorable frame.",
+    images: ["/gallery/IMG_0757.jpg"],
   },
 };
 
@@ -53,11 +52,7 @@ export default function RootLayout({ children }) {
   `;
 
   return (
-    <html
-      lang="en"
-      className={`${playfair.variable} ${inter.variable} ${jetbrains.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>

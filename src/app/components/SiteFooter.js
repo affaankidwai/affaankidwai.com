@@ -17,6 +17,7 @@ export function SiteFooter() {
           <h4>Wander</h4>
           <ul>
             <li><Link href="/photography">Photography</Link></li>
+            <li><Link href="/favorites">Favorites</Link></li>
             <li><Link href="/species">Species</Link></li>
             <li><Link href="/trips">Trips</Link></li>
             <li><Link href="/journal">Journal</Link></li>

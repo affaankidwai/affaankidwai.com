@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { SiteHeader } from "../components/SiteHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { Gallery } from "../components/Lightbox";
@@ -40,6 +42,12 @@ export default function PhotographyPage() {
                 Favorites
                 <strong>{favorites}</strong>
               </div>
+            </div>
+            <div className="page-actions">
+              <Link className="btn-primary" href="/favorites">
+                See Affaan&rsquo;s favorites
+                <ArrowRight size={16} />
+              </Link>
             </div>
           </div>
         </section>

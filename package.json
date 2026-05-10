@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
     "dev:bundled": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next dev --turbopack",
-    "build:bundled": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next build --turbopack",
+    "build:bundled": "bash scripts/run-node.sh ./node_modules/next/dist/bin/next build --webpack",
     "vercel": "HOME=\"$PWD/.vercel-home\" XDG_CACHE_HOME=\"$PWD/.vercel-cache\" bash scripts/run-node.sh ./node_modules/vercel/dist/vc.js"
   },
   "engines": {
