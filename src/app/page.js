@@ -8,6 +8,7 @@ import {
   Map,
   Music2,
   Spade,
+  MapPin,
 } from "lucide-react";
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "./components/SiteFooter";
@@ -23,7 +24,7 @@ import { getAllPosts, formatPostDate } from "../lib/posts";
 const pursuitIcons = {
   photography: Camera,
   tech: Code2,
-  travel: Map,
+  trips: MapPin,
   cars: Car,
   music: Music2,
   cards: Spade,
@@ -63,7 +64,7 @@ export default async function Home() {
             <p className="lede">
               Associate Application Developer at Oracle Financial Services
               Software. Wildlife photographer in Indian forests. This is where
-              I keep the work, the photographs, and the field notes.
+              I keep the work, the photographs, the trips, and the writing.
             </p>
             <div className="hero-actions">
               <Link className="btn-primary" href="/photography">
@@ -77,7 +78,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section id="about" className="about-snippet">
+        <section id="about" className="about-snippet reveal">
           <div className="shell about-snippet-grid">
             <div>
               <p className="eyebrow">About</p>
@@ -121,7 +122,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="featured-frame">
+        <section className="featured-frame reveal">
           <div className="shell featured-frame-grid">
             <Link
               href={`/photos/${featuredFrame.slug}`}
@@ -160,7 +161,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <section className="section" id="worlds">
+        <section className="section reveal" id="worlds">
           <div className="shell">
             <div className="section-head">
               <div>
@@ -224,21 +225,21 @@ export default async function Home() {
         </section>
 
         {posts.length > 0 && (
-          <section className="section section-tight">
+          <section className="section section-tight reveal">
             <div className="shell">
               <div className="section-head">
                 <div>
-                  <p className="eyebrow">Field Notes</p>
-                  <h2>Trip writing, slowly.</h2>
+                  <p className="eyebrow">Journal</p>
+                  <h2>From the journal.</h2>
                 </div>
                 <p className="lede">
-                  Notes from forests, lake edges, and the long waits behind a
-                  photograph.
+                  Notes from forests, lake edges, the road, and the long
+                  waits behind a photograph.
                 </p>
               </div>
               <div className="posts-grid">
                 {posts.map((post) => (
-                  <Link key={post.slug} className="post-card" href={`/blog/${post.slug}`}>
+                  <Link key={post.slug} className="post-card" href={`/journal/${post.slug}`}>
                     {post.cover && (
                       <div className="post-cover">
                         <Image
@@ -264,15 +265,15 @@ export default async function Home() {
                   </Link>
                 ))}
               </div>
-              <Link className="section-link" href="/blog" style={{ marginTop: 28 }}>
-                All field notes
+              <Link className="section-link" href="/journal" style={{ marginTop: 28 }}>
+                All entries
                 <ArrowRight size={16} />
               </Link>
             </div>
           </section>
         )}
 
-        <section className="contact-band">
+        <section className="contact-band reveal">
           <div className="shell-narrow">
             <p className="eyebrow">Contact</p>
             <h2>Say hi.</h2>

@@ -18,7 +18,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = await getPost(slug);
-  if (!post) return { title: "Field Note Not Found" };
+  if (!post) return { title: "Journal entry not found" };
   return {
     title: post.title,
     description: post.summary,
@@ -41,9 +41,9 @@ export default async function PostPage({ params }) {
       <main>
         <article className="post">
           <div className="shell" style={{ maxWidth: 760, marginInline: "auto" }}>
-            <Link href="/blog" className="back-link">
+            <Link href="/journal" className="back-link">
               <ArrowLeft size={14} />
-              All field notes
+              All journal entries
             </Link>
           </div>
 

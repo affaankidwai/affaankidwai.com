@@ -4,8 +4,8 @@ import { ThemeToggle } from "./ThemeToggle";
 const nav = [
   { href: "/photography", label: "Photography" },
   { href: "/species", label: "Species" },
-  { href: "/favorites", label: "Favorites" },
-  { href: "/blog", label: "Field Notes" },
+  { href: "/trips", label: "Trips" },
+  { href: "/journal", label: "Journal" },
   { href: "/about", label: "About" },
 ];
 

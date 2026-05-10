@@ -68,12 +68,15 @@ export const pursuits = [
     status: "soon",
   },
   {
-    slug: "travel",
-    title: "Travel",
+    slug: "trips",
+    title: "Trips",
     eyebrow: "Forests · Cities · Roads",
     description:
-      "Trip writing from across India and beyond — places, weather, and the small details.",
-    status: "soon",
+      "Long-form writeups from each trip — what we drove through, what we waited for, the photographs that came out.",
+    href: "/trips",
+    cover: "/gallery/IMG_4466.jpg",
+    status: "live",
+    detail: "India · ongoing",
   },
   {
     slug: "cars",

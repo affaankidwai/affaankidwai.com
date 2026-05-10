@@ -17,7 +17,9 @@ export function SiteFooter() {
           <h4>Wander</h4>
           <ul>
             <li><Link href="/photography">Photography</Link></li>
-            <li><Link href="/blog">Field Notes</Link></li>
+            <li><Link href="/species">Species</Link></li>
+            <li><Link href="/trips">Trips</Link></li>
+            <li><Link href="/journal">Journal</Link></li>
             <li><Link href="/about">About</Link></li>
             <li><a href={`mailto:${profile.email}`}>Contact</a></li>
           </ul>

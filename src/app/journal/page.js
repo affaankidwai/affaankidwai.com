@@ -6,12 +6,12 @@ import { SiteFooter } from "../components/SiteFooter";
 import { getAllPosts, formatPostDate } from "../../lib/posts";
 
 export const metadata = {
-  title: "Field Notes",
+  title: "Journal",
   description:
-    "Long, slow trip writing about wildlife photography, forests, weather, gear, and the moments behind a frame.",
+    "Long, slow writing — about wildlife photography, forests, weather, the road, and the moments behind a frame.",
 };
 
-export default async function BlogIndex() {
+export default async function JournalIndex() {
   const posts = await getAllPosts();
 
   return (
@@ -20,11 +20,11 @@ export default async function BlogIndex() {
       <main>
         <section className="page-hero">
           <div className="shell">
-            <p className="eyebrow">Field Notes</p>
-            <h1>Trip writing, slowly.</h1>
+            <p className="eyebrow">Journal</p>
+            <h1>Writing, slowly.</h1>
             <p className="lede">
-              Notes from forests, lake edges, and the long waits behind a
-              photograph. Written when there&rsquo;s time, not on a schedule.
+              Long-form notes — from the forest, the road, the desk. Written
+              when there&rsquo;s time, not on a schedule.
             </p>
           </div>
         </section>
@@ -40,7 +40,7 @@ export default async function BlogIndex() {
           ) : (
             <div className="blog-list">
               {posts.map((post) => (
-                <Link key={post.slug} href={`/blog/${post.slug}`} className="blog-row">
+                <Link key={post.slug} href={`/journal/${post.slug}`} className="blog-row">
                   <div className="cover">
                     {post.cover && (
                       <Image
