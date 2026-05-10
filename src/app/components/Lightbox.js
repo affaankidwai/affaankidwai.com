@@ -1,22 +1,30 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import Link from "next/link";
+import { ArrowUpRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { photoSrc } from "../data";
 
-export function Gallery({ photos }) {
+export function Gallery({ photos, categories = [] }) {
+  const [filter, setFilter] = useState("All");
   const [openIndex, setOpenIndex] = useState(null);
+
+  const filtered = useMemo(() => {
+    if (filter === "All") return photos;
+    if (filter === "Favorites") return photos.filter((p) => p.favorite);
+    return photos.filter((p) => p.category === filter);
+  }, [photos, filter]);
 
   const close = useCallback(() => setOpenIndex(null), []);
   const next = useCallback(() => {
-    setOpenIndex((i) => (i === null ? null : (i + 1) % photos.length));
-  }, [photos.length]);
+    setOpenIndex((i) => (i === null ? null : (i + 1) % filtered.length));
+  }, [filtered.length]);
   const prev = useCallback(() => {
     setOpenIndex((i) =>
-      i === null ? null : (i - 1 + photos.length) % photos.length,
+      i === null ? null : (i - 1 + filtered.length) % filtered.length,
     );
-  }, [photos.length]);
+  }, [filtered.length]);
 
   useEffect(() => {
     if (openIndex === null) return undefined;
@@ -33,39 +41,73 @@ export function Gallery({ photos }) {
     };
   }, [openIndex, close, next, prev]);
 
+  const filterChips = ["All", ...categories, "Favorites"];
+
   return (
     <>
-      <div className="gallery">
-        {photos.map((photo, index) => (
-          <button
-            key={photo.id}
-            className="gallery-item"
-            type="button"
-            onClick={() => setOpenIndex(index)}
-            aria-label={`Open ${photo.title || photo.id}`}
-            style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
-          >
-            <Image
-              src={photoSrc(photo)}
-              alt={photo.title || photo.subject || "Wildlife photograph"}
-              width={photo.width}
-              height={photo.height}
-              sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
-            />
-            {(photo.title || photo.subject) && (
-              <div className="meta">
-                {photo.title && <strong>{photo.title}</strong>}
-                {photo.subject || photo.place || ""}
-              </div>
-            )}
-          </button>
-        ))}
-      </div>
-      {openIndex !== null && (
+      {filterChips.length > 2 && (
+        <div className="gallery-filter" role="tablist" aria-label="Filter frames">
+          {filterChips.map((chip) => (
+            <button
+              key={chip}
+              type="button"
+              role="tab"
+              aria-selected={filter === chip}
+              className={`gallery-filter-chip${filter === chip ? " is-active" : ""}`}
+              onClick={() => {
+                setFilter(chip);
+                setOpenIndex(null);
+              }}
+            >
+              {chip}
+              <span className="gallery-filter-count">
+                {chip === "All"
+                  ? photos.length
+                  : chip === "Favorites"
+                    ? photos.filter((p) => p.favorite).length
+                    : photos.filter((p) => p.category === chip).length}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+
+      {filtered.length === 0 ? (
+        <p className="gallery-empty">No frames in this set yet.</p>
+      ) : (
+        <div className="gallery">
+          {filtered.map((photo, index) => (
+            <button
+              key={photo.id}
+              className="gallery-item"
+              type="button"
+              onClick={() => setOpenIndex(index)}
+              aria-label={`Open ${photo.title || photo.id}`}
+              style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
+            >
+              <Image
+                src={photoSrc(photo)}
+                alt={photo.title || photo.subject || "Wildlife photograph"}
+                width={photo.width}
+                height={photo.height}
+                sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
+              />
+              {(photo.title || photo.subject) && (
+                <div className="meta">
+                  {photo.title && <strong>{photo.title}</strong>}
+                  {photo.subject || photo.place || ""}
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {openIndex !== null && filtered[openIndex] && (
         <LightboxStage
-          photo={photos[openIndex]}
+          photo={filtered[openIndex]}
           index={openIndex}
-          total={photos.length}
+          total={filtered.length}
           onClose={close}
           onNext={next}
           onPrev={prev}
@@ -101,6 +143,14 @@ function LightboxStage({ photo, index, total, onClose, onNext, onPrev }) {
                 photo.id}
             </span>
           </div>
+          <Link
+            href={`/photos/${photo.slug}`}
+            className="lightbox-story-link"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Read the story
+            <ArrowUpRight size={14} />
+          </Link>
           <span>{`${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`}</span>
         </div>
       </div>

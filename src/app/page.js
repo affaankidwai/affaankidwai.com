@@ -12,6 +12,7 @@ import {
 import { SiteHeader } from "./components/SiteHeader";
 import { SiteFooter } from "./components/SiteFooter";
 import {
+  featuredFrame,
   heroPhoto,
   photoSrc,
   profile,
@@ -117,6 +118,45 @@ export default async function Home() {
                 </ul>
               </div>
             </aside>
+          </div>
+        </section>
+
+        <section className="featured-frame">
+          <div className="shell featured-frame-grid">
+            <Link
+              href={`/photos/${featuredFrame.slug}`}
+              className="featured-frame-image"
+              aria-label={featuredFrame.title}
+            >
+              <Image
+                src={photoSrc(featuredFrame)}
+                alt={featuredFrame.title || ""}
+                width={featuredFrame.width}
+                height={featuredFrame.height}
+                sizes="(max-width: 1000px) 100vw, 60vw"
+              />
+            </Link>
+            <div className="featured-frame-copy">
+              <p className="eyebrow">Featured frame</p>
+              <h2>{featuredFrame.title || "Untitled"}</h2>
+              <ul className="featured-frame-meta">
+                {featuredFrame.subject && <li><span>Species</span>{featuredFrame.subject}</li>}
+                {featuredFrame.place && <li><span>Location</span>{featuredFrame.place}</li>}
+                {featuredFrame.shutter && featuredFrame.aperture && (
+                  <li>
+                    <span>Settings</span>
+                    {featuredFrame.shutter} · {featuredFrame.aperture} · ISO {featuredFrame.iso}
+                  </li>
+                )}
+              </ul>
+              {featuredFrame.fieldNote && (
+                <p className="featured-frame-note">{featuredFrame.fieldNote}</p>
+              )}
+              <Link className="section-link" href={`/photos/${featuredFrame.slug}`} style={{ marginTop: 18 }}>
+                View frame
+                <ArrowRight size={16} />
+              </Link>
+            </div>
           </div>
         </section>
 
